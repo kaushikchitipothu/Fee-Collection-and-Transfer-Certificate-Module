@@ -1,0 +1,56 @@
+CREATE DATABASE myapp;
+
+USE myapp;
+
+USER:
+
+CREATE TABLE users( username VARCHAR(30) NOT NULL , password VARCHAR(20) NOT NULL , email VARCHAR(50) NOT NULL , mobile DECIMAL(10) NOT NULL, 
+code DECIMAL(10) NOT NULL , firstname varchar(20) NOT NULL,lastname varchar(30) NOT NULL,year char(1) NOT NULL,class varchar(10), 
+PRIMARY KEY(username)) ENGINE = InnoDB;
+
+INSERT INTO users VALUES ("17BD1A0505","test","livead1919@gmail.com",7780169128,0,'Raahitya','Vishnumolakala','4','CSE-A');
+INSERT INTO users VALUES ("17BD1A050D","test","liveupdate19@gmail.com",8080909090,0,'Ashrita','Bhadriraju','4','CSE-A');
+INSERT INTO users VALUES ("17BD1A050F","test","kaushik@gmail.com",8463931425,0,'Kaushik','Chitipothu','4','CSE-A');
+INSERT INTO users VALUES ("17BD1A050P","test","rohanreddy@gmail.com",9000331425,0,'Rohan','Reddy','4','CSE-A');
+INSERT INTO users VALUES ("17BD1A05DE","test","chandana@gmail.com",8080909090,0,'Chandana','Bharathaa','4','ECE-B');
+INSERT INTO users VALUES ("18BD1A0512","test","ria@gmail.com",9870090934,0,'Ria','Sharma','3','CSE-C');
+INSERT INTO users VALUES ("18BD1A050J","test","manish@gmail.com",7685409341,0,'Manish','Pandey','3','CSE-D');
+INSERT INTO users VALUES ("17BD1A0534","test","prerna@gmail.com",9453682970,0,'Prerna','Chowdary','4','CSE-F');
+INSERT INTO users VALUES ("17BD1A054V","test","ryan@gmail.com",8763682970,0,'Ryan','Roy','4','CSE-E');
+INSERT INTO users VALUES ("19BD1A058D","test","mona@gmail.com",9763682970,0,'Mona','Singh','2','CSE-D');
+
+
+ADMIN:
+
+CREATE TABLE admin( `uname` VARCHAR(30) NOT NULL , `pwd` VARCHAR(20) NOT NULL,PRIMARY KEY(username)) ENGINE = InnoDB;
+
+INSERT INTO admin VALUES ("kmit","kmit");
+
+
+TC:
+
+create table appointment(username varchar(20),bookedOn varchar(20),appointDate varchar(20),appointTime varchar(20),status varchar(30),timestamp varchar(20), FOREIGN KEY (username) REFERENCES users(username));
+
+create table allAppointment(username varchar(20),bookedOn varchar(20),appointDate varchar(20),appointTime varchar(20),status varchar(30),timestamp varchar(20),FOREIGN KEY (username) REFERENCES users(username));
+
+FEE:
+
+create table fee(first char(1) not null default 'N', second char(1) not null default 'N', third  char(1) not null default 'N', fourth char(1) not null default 'N', primary key(username))engine=innodb select username, year from users;
+alter table fee add paidOn date, add feeStatus varchar(10) default 'Not Paid', add chalanNo char(8) default 'N/A', add paymentMode varchar(10) default 'N/A';
+alter table fee add scholarship varchar(20) default 'No Scholarship';
+
+update fee set first='Y',second='Y',third='Y' where year='4';
+update fee set first='Y',second='Y' where year='3';
+update fee set first='Y' where year='2';
+
+update fee set first='Y',second='Y',third='Y',scholarship='Partial' where username='17BD1A050D';
+update fee set first='Y',second='Y',third='Y',scholarship='Partial' where username='17BD1A054V';
+update fee set first='Y',second='Y',third='Y',scholarship='Full' where username='17BD1A0534';
+
+
+create table feeStructure (year char(1) DEFAULT NULL, fees varchar(6) DEFAULT NULL);
+insert into feeStructure  values ('1','100000');
+insert into feeStructure  values ('2','100000');
+insert into feeStructure  values ('3','90000');
+insert into feeStructure  values ('4','80000');
+
